@@ -1,0 +1,19 @@
+{
+    "reviewValido": {
+      "product_id": 22,
+      "review": "Nice album!",
+      "reviewer": "John Doe",
+      "rating": 5
+    },
+
+    "reviewEditar": {
+      "product_id": 22,
+      "review": "Nice!",
+      "reviewer": "John Smith",
+      "rating": 10
+    },
+
+    "reviewDeletar": {
+      "force": true
+    }
+}
