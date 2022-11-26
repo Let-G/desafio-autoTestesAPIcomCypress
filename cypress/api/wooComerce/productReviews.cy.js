@@ -2,6 +2,7 @@
 import tokenFixture from "../../fixtures/token.json";
 import reviewFixture from "../../fixtures/review.json";
 import statusFixture from "../../fixtures/status.json";
+import reviewWooCommerceSchema from "../../contracts/review.contract";
 import { faker } from "@faker-js/faker";
 
 describe("Product Review", () => {
@@ -27,10 +28,13 @@ describe("Product Review", () => {
       expect(response.body.reviewer).to.eq(reviewFixture.reviewValido.reviewer);
       expect(response.body.reviewer_email).to.eq(reviewer_email);
       expect(response.body.rating).to.eq(reviewFixture.reviewValido.rating);
-      cy.deleteProductReviewsWooComerce(
-        tokenFixture.token,
-        id,
-        reviewFixture.reviewDeletar.force
+      return (
+        reviewWooCommerceSchema.validateAsync(response.body),
+        cy.deleteProductReviewsWooComerce(
+          tokenFixture.token,
+          id,
+          reviewFixture.reviewDeletar.force
+        )
       );
     });
   });
@@ -64,10 +68,13 @@ describe("Product Review", () => {
         );
         expect(response.body.reviewer_email).to.eq(reviewer_email);
         expect(response.body.rating).to.eq(reviewFixture.reviewEditar.rating);
-        cy.deleteProductReviewsWooComerce(
-          tokenFixture.token,
-          id,
-          reviewFixture.reviewDeletar.force
+        return (
+          reviewWooCommerceSchema.validateAsync(response.body),
+          cy.deleteProductReviewsWooComerce(
+            tokenFixture.token,
+            id,
+            reviewFixture.reviewDeletar.force
+          )
         );
       });
     });
@@ -98,6 +105,7 @@ describe("Product Review", () => {
         );
         expect(response.body.reviewer_email).to.eq(reviewer_email);
         expect(response.body.rating).to.eq(reviewFixture.reviewValido.rating);
+        return reviewWooCommerceSchema.validateAsync(response.body);
       });
     });
   });
