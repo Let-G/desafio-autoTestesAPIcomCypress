@@ -1,6 +1,4 @@
-import { required } from "joi";
-
-const Joi = require("joi");
+import Joi from "joi";
 
 const reviewWooCommerceSchema = Joi.object({
   id: Joi.number().required(),
